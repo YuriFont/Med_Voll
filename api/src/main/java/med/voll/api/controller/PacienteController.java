@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import med.voll.api.medico.Medico;
 import med.voll.api.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,5 +33,12 @@ public class PacienteController {
     public void atualizar(@RequestBody @Valid DadosAtualizarPaciente p) {
         Paciente paciente = pacienteRepository.getReferenceById(p.id());
         paciente.atualizarInformacoes(p);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void excluir(@PathVariable Long id) {
+        Paciente paciente = pacienteRepository.getReferenceById(id);
+        paciente.excluir();
     }
 }
