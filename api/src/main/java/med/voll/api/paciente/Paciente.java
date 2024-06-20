@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.medico.DadosCadastrarMedico;
 import med.voll.api.models.Endereco;
 
 @Table(name = "pacientes")
@@ -28,4 +29,13 @@ public class Paciente {
     private Endereco endereco;
 
     private Boolean ativo;
+
+    public Paciente(DadosCadastrarPaciente dados) {
+        this.ativo = true;
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.telefone = dados.telefone();
+        this.plano = dados.plano();
+        this.endereco = new Endereco(dados.endereco());
+    }
 }
