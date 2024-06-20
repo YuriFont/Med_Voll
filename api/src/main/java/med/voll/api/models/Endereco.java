@@ -1,9 +1,10 @@
-package med.voll.api.medico;
+package med.voll.api.models;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.medico.DadosEndereco;
 
 @Embeddable
 @Getter
