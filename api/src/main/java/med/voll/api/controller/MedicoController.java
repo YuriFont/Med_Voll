@@ -1,5 +1,6 @@
 package med.voll.api.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.medico.*;
@@ -54,5 +55,13 @@ public class MedicoController {
         medico.excluir();
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    @Transactional
+    public ResponseEntity detalhar(@PathVariable Long id) {
+        Medico medico = medicoRepository.getReferenceById(id);
+
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }
 }
