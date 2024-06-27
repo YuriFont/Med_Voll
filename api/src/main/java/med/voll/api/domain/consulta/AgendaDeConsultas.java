@@ -1,6 +1,6 @@
 package med.voll.api.domain.consulta;
 
-import med.voll.api.domain.consulta.validacoes.ValidadorAgendamentoDeConsulta;
+import med.voll.api.domain.consulta.validacoes_agendamento.ValidadorAgendamentoDeConsulta;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.Paciente;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AgendaDeConsultas {
@@ -41,7 +40,7 @@ public class AgendaDeConsultas {
         Medico medico = escolherMedico(dados);
         if (medico == null)
             throw new ValidacaoException("Não temos médicos desta especialidade disponíveis nesse dia!!!");
-        Consulta consulta = new Consulta(null, medico, paciente,dados.data());
+        Consulta consulta = new Consulta(null, medico, paciente, dados.data());
 
         consultaRepository.save(consulta);
 
