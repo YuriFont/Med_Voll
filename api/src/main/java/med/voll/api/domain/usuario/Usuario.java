@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,6 +23,15 @@ public class Usuario implements UserDetails {
     private Long id;
     private String login;
     private String senha;
+
+    public Usuario(DadosCadastrarUsuario dados) {
+        this.login = dados.login();
+        this.senha = hashPassword(dados.senha());
+    }
+
+    public String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -27,6 +27,7 @@ public class SecurityConfigurations {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(req -> {
+                    req.requestMatchers("/cadastro").permitAll();
                     req.requestMatchers("/login").permitAll();
                     req.anyRequest().authenticated();
                 })
@@ -40,7 +41,7 @@ public class SecurityConfigurations {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    static public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
